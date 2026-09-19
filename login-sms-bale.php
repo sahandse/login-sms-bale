@@ -3,7 +3,7 @@
  * Plugin Name: ورود با پیامک و بله
  * Plugin URI: https://github.com/sahandse/login-sms-bale
  * Description: ورود و ثبت‌نام وردپرس با شماره موبایل، کد یکبارمصرف و بله با پنل تنظیمات فارسی.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Sahand Rezvan
  * Author URI: https://github.com/sahandse
  * Text Domain: login-sms-bale
@@ -14,7 +14,7 @@
 defined('ABSPATH') || exit;
 
 final class LSB_Plugin {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
     const OPTION  = 'lsb_settings';
 
     public function __construct() {
@@ -65,6 +65,10 @@ final class LSB_Plugin {
     }
 
     public function admin_menu() {
+        if (function_exists('s_store_register_submenu')) {
+            s_store_register_submenu('login-sms-bale', 'ورود با پیامک و بله', [$this, 'settings_page'], 'manage_options', 'ورود با پیامک و بله');
+            return;
+        }
         add_menu_page(
             'ورود با پیامک و بله',
             'ورود پیامکی',
